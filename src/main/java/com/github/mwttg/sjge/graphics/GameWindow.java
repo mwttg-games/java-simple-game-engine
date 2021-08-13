@@ -22,6 +22,9 @@ public class GameWindow {
 
     private static final Logger LOG = LoggerFactory.getLogger(GameWindow.class);
 
+    private GameWindow() {
+    }
+
     /**
      * creates a window where 'everything' can be rendered with OpenGL
      *
@@ -29,7 +32,7 @@ public class GameWindow {
      * @return the OpenGL id of that window
      * @throws IOException if the creating fails for any reason
      */
-    public long create(final Configuration configuration) throws IOException {
+    public static long create(final Configuration configuration) throws IOException {
         LOG.info("Start GameWindow");
         initializeGlfw();
         configureGameWindow(configuration);
@@ -41,7 +44,7 @@ public class GameWindow {
         return id;
     }
 
-    private void initializeGlfw() throws IOException {
+    private static void initializeGlfw() throws IOException {
         LOG.debug("Initialize GLFW");
         GLFWErrorCallback.createPrint(System.err).set();
 
@@ -50,7 +53,7 @@ public class GameWindow {
         }
     }
 
-    private void configureGameWindow(final Configuration configuration) {
+    private static void configureGameWindow(final Configuration configuration) {
         final var majorVersion = configuration.openGlConfiguration().openGlMajorVersion();
         final var minorVersion = configuration.openGlConfiguration().openGlMinorVersion();
         LOG.debug("Configure GameWindow. Using OpenGL version %s.%s.".formatted(majorVersion, minorVersion));
@@ -63,7 +66,7 @@ public class GameWindow {
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
     }
 
-    private long createGameWindow(final Configuration configuration) throws IOException {
+    private static long createGameWindow(final Configuration configuration) throws IOException {
         final var title = configuration.title();
         final var width = configuration.width();
         final var height = configuration.height();
@@ -77,7 +80,7 @@ public class GameWindow {
         return id;
     }
 
-    private void setKeyCallback(final long id) {
+    private static void setKeyCallback(final long id) {
         LOG.debug("Set key callback");
 
         final GLFWKeyCallbackI callback = (long windowId, int key, int scancode, int action, int mods) -> {
@@ -88,7 +91,7 @@ public class GameWindow {
         GLFW.glfwSetKeyCallback(id, callback);
     }
 
-    private void applyOpenGlConfiguration(final long id, final Configuration configuration) {
+    private static void applyOpenGlConfiguration(final long id, final Configuration configuration) {
         LOG.debug("Setup OpenGL");
         final var vsync = configuration.openGlConfiguration().vsync() ? 1 : 0;
         final var backfaceCulling = configuration.openGlConfiguration().backfaceCulling();
@@ -113,7 +116,7 @@ public class GameWindow {
         }
     }
 
-    private void centerGameWindow(final long id) throws IOException {
+    private static void centerGameWindow(final long id) throws IOException {
         LOG.debug("Center GameWindow");
 
         final var stack = MemoryStack.stackPush();
