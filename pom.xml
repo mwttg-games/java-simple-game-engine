@@ -11,6 +11,45 @@
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
+
+        <!-- Dependency Versions sorted alphabetically -->
+        <!-- Dependencies for Tests -->
+        <assertJ.version>3.20.2</assertJ.version>
+        <mockito.version>3.11.2</mockito.version>
+        <testng.version>7.4.0</testng.version>
     </properties>
 
+    <dependencies>
+        <!-- Dependencies for Tests -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertJ.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <url>https://github.com/mwttg/java-simple-game-engine</url>
+    <organization>
+        <name>private</name>
+        <url>https://github.com/mwttg</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>mwttg</id>
+            <email>Marco-Wittig@gmx.de</email>
+        </developer>
+    </developers>
 </project>
