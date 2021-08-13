@@ -6,16 +6,18 @@
 * x64 OS (MacOs, Linux, Windows)
 
 ## Build the library
-There are three Maven profiles
-* lwjgl-natives-linux-amd64
-* lwjgl-natives-macos-amd64
-* lwjgl-natives-windows-amd64
+The `pom.xml` file contains a property `<lwjgl.natives>`.
+You can set this value to:
+* natives-linux
+* natives-macos
+* natives-windows
 
-Depending on your OS you can build the JavaSimpleGameLibrary by:
+depending on the OS where you build the library.
+
+!!TODO!! find a way to pack ALL natives into the jar, so every OS can use this lib without re-install
+
+You can build the JavaSimpleGameLibrary by:
 ```
-mvn clean install -P<profile>
+mvn clean install
 ```
-Example:
-```
-mvn clean install -Plwjgl-natives-macos-amd64
-```
+This installs the dependency to your local `.m2` repository.
