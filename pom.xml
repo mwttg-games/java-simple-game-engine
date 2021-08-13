@@ -15,6 +15,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependency Versions sorted alphabetically -->
+        <logback.version>1.2.5</logback.version>
         <!-- Dependencies for Tests -->
         <assertJ.version>3.20.2</assertJ.version>
         <mockito.version>3.11.2</mockito.version>
@@ -22,6 +23,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
         <!-- Dependencies for Tests -->
         <dependency>
             <groupId>org.assertj</groupId>

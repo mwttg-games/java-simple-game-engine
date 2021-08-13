@@ -6,6 +6,7 @@ Hopefully this will become a library of basic game functionality, I've written i
 All this stuff will be based on [LWJGL][lwjgl].
 Today real basic functionality was added like:
 * reading a text file
+* provide a Logger
 
 [comment]: <> (collection of links sorted alphabetically ascending)
 [lwjgl]: https://www.lwjgl.org/
