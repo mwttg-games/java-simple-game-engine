@@ -25,7 +25,7 @@ public class ReadTextFile {
      * @throws IOException if read fails for any reason
      */
     public static Collection<String> fromResources(final String filename) throws IOException {
-        LOG.debug("Try to read file: " + filename);
+        LOG.debug("Read file: " + filename);
         final var classLoader = ClassLoader.getSystemClassLoader();
         try (final InputStream inputStream = classLoader.getResourceAsStream(filename)) {
             if (inputStream == null) {
