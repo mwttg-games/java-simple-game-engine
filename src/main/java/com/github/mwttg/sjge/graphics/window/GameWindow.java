@@ -1,5 +1,6 @@
 package com.github.mwttg.sjge.graphics.window;
 
+import com.github.mwttg.sjge.utilities.CleanUpUtilities;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
@@ -35,7 +36,8 @@ public class GameWindow {
         LOG.info("Start GameWindow");
         initializeGlfw();
         configureGameWindow(configuration);
-        final var id =createGameWindow(configuration);
+        final var id = createGameWindow(configuration);
+        CleanUpUtilities.setGameWindowId(id);
         setKeyCallback(id);
         applyOpenGlConfiguration(id, configuration);
         centerGameWindow(id);
@@ -44,7 +46,7 @@ public class GameWindow {
     }
 
     private static void initializeGlfw() throws IOException {
-        LOG.debug("Initialize GLFW");
+        LOG.debug("  Initialize GLFW");
         GLFWErrorCallback.createPrint(System.err).set();
 
         if (!GLFW.glfwInit()) {
@@ -55,7 +57,7 @@ public class GameWindow {
     private static void configureGameWindow(final Configuration configuration) {
         final var majorVersion = configuration.openGlConfiguration().openGlMajorVersion();
         final var minorVersion = configuration.openGlConfiguration().openGlMinorVersion();
-        LOG.debug("Configure GameWindow. Using OpenGL version %s.%s.".formatted(majorVersion, minorVersion));
+        LOG.debug("  Configure GameWindow. Using OpenGL version %s.%s.".formatted(majorVersion, minorVersion));
 
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE);
@@ -69,7 +71,7 @@ public class GameWindow {
         final var title = configuration.title();
         final var width = configuration.width();
         final var height = configuration.height();
-        LOG.debug("Create GameWindow with title %s and dimension %sx%s".formatted(title, width, height));
+        LOG.debug("  Create GameWindow with title %s and dimension %sx%s".formatted(title, width, height));
 
         final var id = GLFW.glfwCreateWindow(width, height, title, NULL, NULL);
         if (id == NULL) {
@@ -80,7 +82,7 @@ public class GameWindow {
     }
 
     private static void setKeyCallback(final long id) {
-        LOG.debug("Set key callback");
+        LOG.debug("  Set key callback");
 
         final GLFWKeyCallbackI callback = (long windowId, int key, int scancode, int action, int mods) -> {
             if (key == GLFW.GLFW_KEY_ESCAPE && action == GLFW.GLFW_RELEASE) {
@@ -91,7 +93,7 @@ public class GameWindow {
     }
 
     private static void applyOpenGlConfiguration(final long id, final Configuration configuration) {
-        LOG.debug("Setup OpenGL");
+        LOG.debug("  Setup OpenGL");
         final var vsync = configuration.openGlConfiguration().vsync() ? 1 : 0;
         final var backfaceCulling = configuration.openGlConfiguration().backfaceCulling();
         final var wireframe = configuration.openGlConfiguration().wireframe();
@@ -116,14 +118,14 @@ public class GameWindow {
     }
 
     private static void centerGameWindow(final long id) throws IOException {
-        LOG.debug("Center GameWindow");
+        LOG.debug("  Center GameWindow");
 
         final var stack = MemoryStack.stackPush();
         final var pWidth = stack.mallocInt(1);
         final var pHeight = stack.mallocInt(1);
         GLFW.glfwGetWindowSize(id, pWidth, pHeight);
         final var videoMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
-        if (videoMode== null) {
+        if (videoMode == null) {
             throw new IOException("No video mode found");
         }
 
