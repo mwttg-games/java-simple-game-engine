@@ -6,6 +6,10 @@ Basic functionality was added, like:
 * ShaderProgram
 * VBO
 * VAO
+* TextureLoader
+* TextureRenderer
+* TexturedPipeline
+* Simple first MatrixStack
 
 ### 2021-08-13
 Project start, ... well once again (This seems like, it's becoming a running gag).

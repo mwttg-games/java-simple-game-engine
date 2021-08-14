@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL40;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,11 @@ public final class CleanUpUtilities {
     private static final Logger LOG = LoggerFactory.getLogger(CleanUpUtilities.class);
 
     private static long gameWindowId;
-    private static List<Integer> shaderProgramIds = List.of();
-    private static List<Integer> shaderIds = List.of();
-    private static List<Integer> vertexBufferObjectIds = List.of();
-    private static List<Integer> vertexArrayObjectIds = List.of();
-    private static List<Integer> textureIds = List.of();
+    private static List<Integer> shaderProgramIds = new ArrayList<>();
+    private static List<Integer> shaderIds = new ArrayList<>();
+    private static List<Integer> vertexBufferObjectIds = new ArrayList<>();
+    private static List<Integer> vertexArrayObjectIds = new ArrayList<>();
+    private static List<Integer> textureIds = new ArrayList<>();
 
     private CleanUpUtilities() {
     }
@@ -95,11 +96,12 @@ public final class CleanUpUtilities {
         shaderProgramIds.forEach(GL40::glDeleteProgram);
         LOG.debug("  Remove GameWindow");
         cleanUpGameWindow();
-        
-        vertexArrayObjectIds = List.of();
-        vertexBufferObjectIds = List.of();
-        shaderIds = List.of();
-        shaderProgramIds = List.of();
+
+        textureIds = new ArrayList<>();
+        vertexArrayObjectIds = new ArrayList<>();
+        vertexBufferObjectIds = new ArrayList<>();
+        shaderIds = new ArrayList<>();
+        shaderProgramIds = new ArrayList<>();
     }
 
     private static void cleanUpGameWindow() {

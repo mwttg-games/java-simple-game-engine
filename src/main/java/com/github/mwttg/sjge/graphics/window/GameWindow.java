@@ -1,5 +1,6 @@
 package com.github.mwttg.sjge.graphics.window;
 
+import com.github.mwttg.sjge.configuration.Configuration;
 import com.github.mwttg.sjge.utilities.CleanUpUtilities;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -28,11 +29,12 @@ public class GameWindow {
     /**
      * creates a window where 'everything' can be rendered with OpenGL
      *
-     * @param configuration the configuration for the GameWindow
+     * @param configuration the {@link Configuration} for the GameWindow
      * @return the OpenGL id of that window
      * @throws IOException if the creating fails for any reason
      */
     public static long create(final Configuration configuration) throws IOException {
+        LOG.info(configuration.prettyPrint());
         LOG.info("Start GameWindow");
         initializeGlfw();
         configureGameWindow(configuration);
@@ -68,9 +70,9 @@ public class GameWindow {
     }
 
     private static long createGameWindow(final Configuration configuration) throws IOException {
-        final var title = configuration.title();
-        final var width = configuration.width();
-        final var height = configuration.height();
+        final var title = configuration.gameWindowConfiguration().title();
+        final var width = configuration.gameWindowConfiguration().width();
+        final var height = configuration.gameWindowConfiguration().height();
         LOG.debug("  Create GameWindow with title %s and dimension %sx%s".formatted(title, width, height));
 
         final var id = GLFW.glfwCreateWindow(width, height, title, NULL, NULL);

@@ -75,7 +75,7 @@ public final class ShaderProgram {
             throw new IOException("Can't create shader");
         }
 
-        final var code = sourceCode.stream().filter(line -> line.equals("")).collect(Collectors.joining("\n"));
+        final var code = sourceCode.stream().filter(line -> !line.equals("")).collect(Collectors.joining("\n"));
         GL40.glShaderSource(shaderId, code);
         GL40.glCompileShader(shaderId);
         if (GL40.glGetShaderi(shaderId, GL40.GL_COMPILE_STATUS) == GL40.GL_FALSE) {
