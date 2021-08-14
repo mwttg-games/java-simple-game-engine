@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * The GameLoop/Main Loop
  */
-public class MainLoop {
+public final class MainLoop {
 
     /**
      * a simple main loop where 'nothing' happens (no rendering/ no physics/logic)

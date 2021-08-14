@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * A ShaderProgram is used for visualize geometry inside a {@link com.github.mwttg.sjge.graphics.window.GameWindow}
  */
-public class ShaderProgram {
+public final class ShaderProgram {
 
     private static final Logger LOG = LoggerFactory.getLogger(ShaderProgram.class);
 

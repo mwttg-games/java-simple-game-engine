@@ -10,13 +10,14 @@ import java.util.List;
 /**
  * Functionality to clean up OpenGL
  */
-public class CleanUpUtilities {
+public final class CleanUpUtilities {
 
     private static final Logger LOG = LoggerFactory.getLogger(CleanUpUtilities.class);
 
     private static long gameWindowId;
     private static List<Integer> shaderProgramIds = List.of();
     private static List<Integer> shaderIds = List.of();
+    private static List<Integer> vertexBufferObjectIds = List.of();
 
     private CleanUpUtilities() {
     }
@@ -49,10 +50,21 @@ public class CleanUpUtilities {
     }
 
     /**
+     * add a vertex buffer object id for later clean up
+     *
+     * @param id of the vertex buffer object
+     */
+    public static void addVertexBufferObjectId(final int id) {
+        vertexBufferObjectIds.add(id);
+    }
+
+    /**
      * Clean up OpenGL ids
      */
     public static void purge() {
         LOG.info("Start clean up process");
+        LOG.debug("  Remove VertexBufferObjects");
+        vertexBufferObjectIds.forEach(GL20::glDeleteBuffers);
         LOG.debug("  Remove Shaders");
         shaderIds.forEach(GL20::glDeleteShader);
         LOG.debug("  Remove ShaderPrograms");

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Read a text file
  */
-public class FileUtilities {
+public final class FileUtilities {
 
     private static final Logger LOG = LoggerFactory.getLogger(FileUtilities.class);
 
