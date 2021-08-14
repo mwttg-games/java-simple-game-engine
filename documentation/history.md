@@ -7,6 +7,8 @@ All this stuff will be based on [LWJGL][lwjgl].
 Today real basic functionality was added like:
 * reading a text file
 * provide a Logger
+* the GameWindow
+* a simple MainLoop (where nothing happens)
 
 [comment]: <> (collection of links sorted alphabetically ascending)
 [lwjgl]: https://www.lwjgl.org/
