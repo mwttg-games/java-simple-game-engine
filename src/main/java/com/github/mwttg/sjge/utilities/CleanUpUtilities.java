@@ -1,7 +1,7 @@
 package com.github.mwttg.sjge.utilities;
 
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL20;
+import org.lwjgl.opengl.GL40;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +18,7 @@ public final class CleanUpUtilities {
     private static List<Integer> shaderProgramIds = List.of();
     private static List<Integer> shaderIds = List.of();
     private static List<Integer> vertexBufferObjectIds = List.of();
+    private static List<Integer> vertexArrayObjectIds = List.of();
 
     private CleanUpUtilities() {
     }
@@ -59,18 +60,34 @@ public final class CleanUpUtilities {
     }
 
     /**
+     * add a vertex array object id for later clean up
+     *
+     * @param id of the vertex array object
+     */
+    public static void addVertexArrayObjectId(final int id) {
+        vertexArrayObjectIds.add(id);
+    }
+
+    /**
      * Clean up OpenGL ids
      */
     public static void purge() {
         LOG.info("Start clean up process");
+        LOG.debug("  Remove VertexArrayObjects");
+        vertexArrayObjectIds.forEach(GL40::glDeleteVertexArrays);
         LOG.debug("  Remove VertexBufferObjects");
-        vertexBufferObjectIds.forEach(GL20::glDeleteBuffers);
+        vertexBufferObjectIds.forEach(GL40::glDeleteBuffers);
         LOG.debug("  Remove Shaders");
-        shaderIds.forEach(GL20::glDeleteShader);
+        shaderIds.forEach(GL40::glDeleteShader);
         LOG.debug("  Remove ShaderPrograms");
-        shaderProgramIds.forEach(GL20::glDeleteProgram);
+        shaderProgramIds.forEach(GL40::glDeleteProgram);
         LOG.debug("  Remove GameWindow");
         cleanUpGameWindow();
+        
+        vertexArrayObjectIds = List.of();
+        vertexBufferObjectIds = List.of();
+        shaderIds = List.of();
+        shaderProgramIds = List.of();
     }
 
     private static void cleanUpGameWindow() {

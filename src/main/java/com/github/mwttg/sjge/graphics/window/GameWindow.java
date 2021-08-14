@@ -5,7 +5,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallbackI;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL40;
 import org.lwjgl.system.MemoryStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,11 +59,11 @@ public class GameWindow {
         final var minorVersion = configuration.openGlConfiguration().openGlMinorVersion();
         LOG.debug("  Configure GameWindow. Using OpenGL version %s.%s.".formatted(majorVersion, minorVersion));
 
-        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL11.GL_TRUE);
-        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL11.GL_TRUE);
+        GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GL40.GL_TRUE);
+        GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GL40.GL_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, majorVersion);
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, minorVersion);
-        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE);
+        GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL40.GL_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
     }
 
@@ -100,20 +100,20 @@ public class GameWindow {
 
         GLFW.glfwMakeContextCurrent(id);
         GL.createCapabilities();
-        GL11.glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+        GL40.glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
         GLFW.glfwSwapInterval(vsync);
         GLFW.glfwShowWindow(id);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL40.glEnable(GL40.GL_DEPTH_TEST);
+        GL40.glEnable(GL40.GL_BLEND);
+        GL40.glBlendFunc(GL40.GL_SRC_ALPHA, GL40.GL_ONE_MINUS_SRC_ALPHA);
 
         if (backfaceCulling) {
-            GL11.glEnable(GL11.GL_CULL_FACE);
-            GL11.glCullFace(GL11.GL_BACK);
+            GL40.glEnable(GL40.GL_CULL_FACE);
+            GL40.glCullFace(GL40.GL_BACK);
         }
 
         if (wireframe) {
-            GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+            GL40.glPolygonMode(GL40.GL_FRONT_AND_BACK, GL40.GL_LINE);
         }
     }
 
