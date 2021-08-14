@@ -19,6 +19,7 @@ public final class CleanUpUtilities {
     private static List<Integer> shaderIds = List.of();
     private static List<Integer> vertexBufferObjectIds = List.of();
     private static List<Integer> vertexArrayObjectIds = List.of();
+    private static List<Integer> textureIds = List.of();
 
     private CleanUpUtilities() {
     }
@@ -69,10 +70,21 @@ public final class CleanUpUtilities {
     }
 
     /**
+     * add a texture for later clean up
+     *
+     * @param id of the texture
+     */
+    public static void addTextureId(final int id) {
+        textureIds.add(id);
+    }
+
+    /**
      * Clean up OpenGL ids
      */
     public static void purge() {
         LOG.info("Start clean up process");
+        LOG.debug("  Remove Textures");
+        textureIds.forEach(GL40::glDeleteTextures);
         LOG.debug("  Remove VertexArrayObjects");
         vertexArrayObjectIds.forEach(GL40::glDeleteVertexArrays);
         LOG.debug("  Remove VertexBufferObjects");

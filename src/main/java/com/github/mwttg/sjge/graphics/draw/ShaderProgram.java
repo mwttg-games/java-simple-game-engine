@@ -1,4 +1,4 @@
-package com.github.mwttg.sjge.graphics.shader;
+package com.github.mwttg.sjge.graphics.draw;
 
 import com.github.mwttg.sjge.utilities.CleanUpUtilities;
 import com.github.mwttg.sjge.utilities.FileUtilities;
