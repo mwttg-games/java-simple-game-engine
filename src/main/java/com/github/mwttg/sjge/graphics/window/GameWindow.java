@@ -1,6 +1,5 @@
-package com.github.mwttg.sjge.graphics;
+package com.github.mwttg.sjge.graphics.window;
 
-import com.github.mwttg.sjge.graphics.window.Configuration;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallbackI;

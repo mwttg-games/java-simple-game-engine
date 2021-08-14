@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 /**
  * Read a text file
  */
-public class ReadTextFile {
+public class FileUtilities {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ReadTextFile.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FileUtilities.class);
 
     /**
      * reads a text file from the resource folder
@@ -24,7 +24,7 @@ public class ReadTextFile {
      * @return the file's content
      * @throws IOException if read fails for any reason
      */
-    public static Collection<String> fromResources(final String filename) throws IOException {
+    public static Collection<String> readFromResources(final String filename) throws IOException {
         LOG.debug("Read file: " + filename);
         final var classLoader = ClassLoader.getSystemClassLoader();
         try (final InputStream inputStream = classLoader.getResourceAsStream(filename)) {
