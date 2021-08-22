@@ -1,5 +1,8 @@
 # History
 
+### 2021-08-22
+Add Phong Shading pipeline
+
 ### 2021-08-14
 
 Some more groundwork is happening. Basic functionality was added, like:

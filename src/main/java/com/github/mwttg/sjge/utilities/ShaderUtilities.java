@@ -17,4 +17,13 @@ public final class ShaderUtilities {
       throw new RuntimeException(e);
     }
   }
+
+  public static int createPhongShader() {
+    try {
+      return ShaderProgram.create("shaders/phong/vertex-shader.glsl",
+          "shaders/phong/fragment-shader.glsl");
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }

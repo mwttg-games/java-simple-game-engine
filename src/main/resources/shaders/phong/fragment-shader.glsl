@@ -19,7 +19,7 @@ struct Material {
 };
 
 uniform sampler2D textureSampler;
-uniform Material meshMaterial;
+uniform Material material;
 uniform PointLight pointLight;
 
 out vec4 finalColor;
@@ -33,18 +33,18 @@ vec4 phongShading() {
     vec4 textureColor = texture(textureSampler, fragTextureCoordinate);
 
     // ambient
-    vec3 ambient = (meshMaterial.ambient).rgb;
+    vec3 ambient = (material.ambient).rgb;
 
     // diffuse
     float diffuseFactor = max(dot(directionSurfaceToLight, normal), 0.0);
-    vec3 diffuse = diffuseFactor * meshMaterial.diffuse;
+    vec3 diffuse = diffuseFactor * material.diffuse;
 
     // specular
     vec3 specular = vec3(0.0);
     if (diffuseFactor > 0) {
         float specularFactor = max(dot(reflectionDirection, directionSurfaceToCamera), 0.0);
-        specularFactor = pow(specularFactor, meshMaterial.specularExponent);
-        specular = specularFactor * meshMaterial.specular;
+        specularFactor = pow(specularFactor, material.specularExponent);
+        specular = specularFactor * material.specular;
     }
 
     vec3 color = (ambient + diffuse + specular) * textureColor.rgb * pointLight.color;
