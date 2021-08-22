@@ -6,13 +6,13 @@ public record OpenGlConfiguration(int openGlMajorVersion,
                                   boolean wireframe,
                                   boolean backfaceCulling) {
 
-    String prettyPrint() {
-        return """
-                    + OpenGL Configuration
-                        OpenGL version.................. %s.%s
-                        vsync .......................... %s
-                        wireframe ...................... %s
-                        backface culling ............... %s
-                """.formatted(openGlMajorVersion, openGlMinorVersion, vsync, wireframe, backfaceCulling);
-    }
+  String prettyPrint() {
+    return """
+            + OpenGL Configuration
+                OpenGL version.................. %s.%s
+                vsync .......................... %s
+                wireframe ...................... %s
+                backface culling ............... %s
+        """.formatted(openGlMajorVersion, openGlMinorVersion, vsync, wireframe, backfaceCulling);
+  }
 }

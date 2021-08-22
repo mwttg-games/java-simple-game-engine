@@ -5,5 +5,5 @@
 <suppressions>
     <suppress files="[/\\]target[/\\]" checks=".*"/>
     <suppress files=".+\.(?:png|gif|jpg|jpeg)$" checks=".*"/>
-    <suppress files=".+\.(?:md|csv|sh)$"  checks=".*"/>
+    <suppress files=".+\.(?:md|csv|sh)$" checks=".*"/>
 </suppressions>
