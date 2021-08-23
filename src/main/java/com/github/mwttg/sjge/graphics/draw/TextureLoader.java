@@ -2,7 +2,6 @@ package com.github.mwttg.sjge.graphics.draw;
 
 import com.github.mwttg.sjge.utilities.CleanUpUtilities;
 import java.io.File;
-import java.io.IOException;
 import org.lwjgl.opengl.GL40;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.system.MemoryStack;
@@ -18,7 +17,7 @@ public final class TextureLoader {
    * @param filename of that image file
    * @return the OpenGL id
    */
-  public static int createFrom(final String filename) throws IOException {
+  public static int createFrom(final String filename) {
     final var stack = MemoryStack.stackPush();
     final var widthBuffer = stack.mallocInt(1);
     final var heightBuffer = stack.mallocInt(1);
@@ -27,13 +26,13 @@ public final class TextureLoader {
     final var classLoader = ClassLoader.getSystemClassLoader();
     final var url = classLoader.getResource(filename);
     if (url == null) {
-      throw new IOException("Texture '%s' does not exist");
+      throw new IllegalArgumentException("Texture '%s' does not exist");
     }
     final var file = new File(url.getFile()).getAbsolutePath();
     STBImage.stbi_set_flip_vertically_on_load(true);
     final var buffer = STBImage.stbi_load(file, widthBuffer, heightBuffer, colorBuffer, 4);
     if (buffer == null) {
-      throw new IOException(
+      throw new RuntimeException(
           "Image file '%s' not loaded: %S".formatted(filename, STBImage.stbi_failure_reason()));
     }
 
