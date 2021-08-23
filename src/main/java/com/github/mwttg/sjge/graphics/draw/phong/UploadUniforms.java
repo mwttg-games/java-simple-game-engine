@@ -1,22 +1,22 @@
 package com.github.mwttg.sjge.graphics.draw.phong;
 
 import com.github.mwttg.sjge.graphics.draw.Location;
-import com.github.mwttg.sjge.graphics.draw.MatrixStack;
 import com.github.mwttg.sjge.graphics.draw.Uniform;
+import com.github.mwttg.sjge.graphics.draw.light.PointLight;
+import com.github.mwttg.sjge.graphics.entity.Drawable;
 import java.util.Map;
 
 final class UploadUniforms implements Uniform {
 
-  void apply(final Map<String, Integer> locations, final MatrixStack matrixStack,
-             final Material material, final PointLight light, final int textureId) {
-    uploadMatrixStack(locations, matrixStack);
-    uploadNormalMatrix(locations, matrixStack.modelMatrix());
-    uploadMaterial(locations, material);
+  void apply(final Map<String, Integer> locations, final Drawable entity, final PointLight light) {
+    uploadMatrixStack(locations, entity.matrixStack());
+    uploadNormalMatrix(locations, entity.matrixStack().modelMatrix());
+    uploadMaterial(locations, entity.material());
+    activateTexture0(locations, entity.ids().textureId());
     uploadPointLight(locations, light);
-    activateTexture0(locations, textureId);
   }
 
-  Map<String, Integer> initializeLocations(final int shaderProgramId) {
+  public Map<String, Integer> initializeLocations(final int shaderProgramId) {
     return Map.ofEntries(
         createLocationFor(shaderProgramId, Location.MODEL_MATRIX),
         createLocationFor(shaderProgramId, Location.VIEW_MATRIX),

@@ -1,4 +1,4 @@
-package com.github.mwttg.sjge.graphics.draw.phong;
+package com.github.mwttg.sjge.graphics.draw.light;
 
 import org.joml.Vector3f;
 

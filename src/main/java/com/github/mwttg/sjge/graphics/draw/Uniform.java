@@ -1,7 +1,8 @@
 package com.github.mwttg.sjge.graphics.draw;
 
-import com.github.mwttg.sjge.graphics.draw.phong.Material;
-import com.github.mwttg.sjge.graphics.draw.phong.PointLight;
+import com.github.mwttg.sjge.graphics.entity.Material;
+import com.github.mwttg.sjge.graphics.draw.light.PointLight;
+import com.github.mwttg.sjge.graphics.entity.MatrixStack;
 import java.nio.FloatBuffer;
 import java.util.Map;
 import org.joml.Matrix3f;
@@ -14,6 +15,8 @@ public interface Uniform {
 
   int CAPACITY = 16;
   FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(CAPACITY);
+
+  Map<String, Integer> initializeLocations(final int shaderProgramId);
 
   // TODO refactor texture render than remove
   default void uploadModelViewPerspectiveMatrix(final Map<String, Integer> locations,
@@ -43,7 +46,6 @@ public interface Uniform {
     GL40.glUniform1f(locations.get(Location.MATERIAL_SPECULAR_EXPONENT),
         material.specularExponent());
   }
-
 
   default void uploadNormalMatrix(final Map<String, Integer> locations,
                                   final Matrix4f modelMatrix) {
