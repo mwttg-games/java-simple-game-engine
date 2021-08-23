@@ -6,9 +6,15 @@ import io.github.mwttg.sjge.graphics.draw.light.PointLight;
 import io.github.mwttg.sjge.graphics.entity.Drawable;
 import java.util.Map;
 
-final class UploadUniforms implements Uniform {
+final class PhongUniforms implements Uniform {
 
-  void apply(final Map<String, Integer> locations, final Drawable entity, final PointLight light) {
+  private final Map<String, Integer> locations;
+
+  PhongUniforms(final int shaderProgramId) {
+    this.locations = initializeLocations(shaderProgramId);
+  }
+
+  void upload(final Drawable entity, final PointLight light) {
     uploadMatrixStack(locations, entity.matrixStack());
     uploadNormalMatrix(locations, entity.matrixStack().modelMatrix());
     uploadMaterial(locations, entity.material());
@@ -16,7 +22,7 @@ final class UploadUniforms implements Uniform {
     uploadPointLight(locations, light);
   }
 
-  public Map<String, Integer> initializeLocations(final int shaderProgramId) {
+  private Map<String, Integer> initializeLocations(final int shaderProgramId) {
     return Map.ofEntries(
         createLocationFor(shaderProgramId, Location.MODEL_MATRIX),
         createLocationFor(shaderProgramId, Location.VIEW_MATRIX),

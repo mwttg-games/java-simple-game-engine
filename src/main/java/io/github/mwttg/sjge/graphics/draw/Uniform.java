@@ -1,7 +1,7 @@
 package io.github.mwttg.sjge.graphics.draw;
 
-import io.github.mwttg.sjge.graphics.entity.Material;
 import io.github.mwttg.sjge.graphics.draw.light.PointLight;
+import io.github.mwttg.sjge.graphics.entity.Material;
 import io.github.mwttg.sjge.graphics.entity.MatrixStack;
 import java.nio.FloatBuffer;
 import java.util.Map;
@@ -15,16 +15,6 @@ public interface Uniform {
 
   int CAPACITY = 16;
   FloatBuffer MATRIX_BUFFER = BufferUtils.createFloatBuffer(CAPACITY);
-
-  Map<String, Integer> initializeLocations(final int shaderProgramId);
-
-  // TODO refactor texture render than remove
-  default void uploadModelViewPerspectiveMatrix(final Map<String, Integer> locations,
-                                                final Matrix4f modelViewPerspective) {
-    final var location = locations.get(Location.MODEL_VIEW_PERSPECTIVE_MATRIX);
-    final var buffer = modelViewPerspective.get(MATRIX_BUFFER);
-    GL40.glUniformMatrix4fv(location, false, buffer);
-  }
 
   default void activateTexture0(final Map<String, Integer> locations, final int textureId) {
     final var location = locations.get(Location.TEXTURE_SAMPLER);
@@ -55,7 +45,8 @@ public interface Uniform {
     GL40.glUniformMatrix4fv(location, false, buffer);
   }
 
-  default void uploadMatrixStack(final Map<String, Integer> locations, final MatrixStack matrixStack) {
+  default void uploadMatrixStack(final Map<String, Integer> locations,
+                                 final MatrixStack matrixStack) {
     uploadModelMatrix(locations, matrixStack.modelMatrix());
     uploadViewMatrix(locations, matrixStack.viewMatrix());
     uploadProjectionMatrix(locations, matrixStack.projectionMatrix());
