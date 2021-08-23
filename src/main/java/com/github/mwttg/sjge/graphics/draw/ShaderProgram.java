@@ -1,8 +1,8 @@
 package com.github.mwttg.sjge.graphics.draw;
 
+import com.github.mwttg.sjge.graphics.window.GameWindow;
 import com.github.mwttg.sjge.utilities.CleanUpUtilities;
 import com.github.mwttg.sjge.utilities.FileUtilities;
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.lwjgl.opengl.GL40;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * A ShaderProgram is used for visualize geometry inside a {@link com.github.mwttg.sjge.graphics.window.GameWindow}
+ * A ShaderProgram is used for visualize geometry inside a {@link GameWindow}
  */
 public final class ShaderProgram {
 
@@ -27,10 +27,8 @@ public final class ShaderProgram {
    * @param vertexShaderFile   the filename of the vertex shader file in the resource folder
    * @param fragmentShaderFile the filename of the fragment shader file in the resource folder
    * @return the OpenGL shader program id
-   * @throws IOException if generation fails for any reason
    */
-  public static int create(final String vertexShaderFile, final String fragmentShaderFile)
-      throws IOException {
+  public static int create(final String vertexShaderFile, final String fragmentShaderFile) {
     final var shaderProgramId = GL40.glCreateProgram();
     CleanUpUtilities.addShaderProgramId(shaderProgramId);
 
@@ -51,31 +49,30 @@ public final class ShaderProgram {
     return shaderProgramId;
   }
 
-  private static void validateShaderProgram(final int shaderProgramId) throws IOException {
+  private static void validateShaderProgram(final int shaderProgramId) {
     GL40.glValidateProgram(shaderProgramId);
     if (GL40.glGetProgrami(shaderProgramId, GL40.GL_VALIDATE_STATUS) == GL40.GL_FALSE) {
       final var message =
           "Validate ShaderProgram failed: %s".formatted(GL40.glGetProgramInfoLog(shaderProgramId));
       LOG.error(message);
-      throw new IOException(message);
+      throw new RuntimeException(message);
     }
   }
 
-  private static void linkShaderProgram(final int shaderProgramId) throws IOException {
+  private static void linkShaderProgram(final int shaderProgramId) {
     GL40.glLinkProgram(shaderProgramId);
     if (GL40.glGetProgrami(shaderProgramId, GL40.GL_LINK_STATUS) == GL40.GL_FALSE) {
       final var message =
           "Link ShaderProgram failed: %s".formatted(GL40.glGetProgramInfoLog(shaderProgramId));
       LOG.error(message);
-      throw new IOException(message);
+      throw new RuntimeException(message);
     }
   }
 
-  private static int compileShader(final List<String> sourceCode, final int type)
-      throws IOException {
+  private static int compileShader(final List<String> sourceCode, final int type) {
     final var shaderId = GL40.glCreateShader(type);
     if (shaderId == 0) {
-      throw new IOException("Can't create shader");
+      throw new RuntimeException("Can't create shader");
     }
 
     final var code =
@@ -85,7 +82,7 @@ public final class ShaderProgram {
     if (GL40.glGetShaderi(shaderId, GL40.GL_COMPILE_STATUS) == GL40.GL_FALSE) {
       final var message = "Compile Shader failed: %s".formatted(GL40.glGetShaderInfoLog(shaderId));
       LOG.error(message);
-      throw new IOException(message);
+      throw new RuntimeException(message);
     }
 
     return shaderId;
