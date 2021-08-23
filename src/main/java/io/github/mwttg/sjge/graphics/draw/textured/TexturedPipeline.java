@@ -1,19 +1,18 @@
-package io.github.mwttg.sjge.graphics.draw.phong;
+package io.github.mwttg.sjge.graphics.draw.textured;
 
-import io.github.mwttg.sjge.graphics.draw.light.PointLight;
 import io.github.mwttg.sjge.graphics.entity.Drawable;
 import io.github.mwttg.sjge.utilities.ShaderUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhongPipeline {
+public class TexturedPipeline {
 
   private final Draw draw;
   private final List<Drawable> entities;
 
-  public PhongPipeline() {
+  public TexturedPipeline() {
     entities = new ArrayList<>();
-    final var shaderProgramId = ShaderUtilities.createPhongShader();
+    final var shaderProgramId = ShaderUtilities.createDefaultShader();
     final var uploadUniforms = new UploadUniforms();
     final var uniformLocations = uploadUniforms.initializeLocations(shaderProgramId);
 
@@ -28,7 +27,7 @@ public class PhongPipeline {
     return entities.remove(entity);
   }
 
-  public void draw(final PointLight light) {
-    entities.forEach(e -> draw.apply(e, light));
+  public void draw() {
+    entities.forEach(draw::apply);
   }
 }
