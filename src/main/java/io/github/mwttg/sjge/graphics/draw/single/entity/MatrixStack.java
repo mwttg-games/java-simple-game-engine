@@ -1,4 +1,4 @@
-package io.github.mwttg.sjge.graphics.entity;
+package io.github.mwttg.sjge.graphics.draw.single.entity;
 
 import org.joml.Matrix4f;
 

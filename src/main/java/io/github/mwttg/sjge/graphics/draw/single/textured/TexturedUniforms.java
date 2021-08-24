@@ -1,8 +1,8 @@
-package io.github.mwttg.sjge.graphics.draw.textured;
+package io.github.mwttg.sjge.graphics.draw.single.textured;
 
 import io.github.mwttg.sjge.graphics.draw.Location;
 import io.github.mwttg.sjge.graphics.draw.Uniform;
-import io.github.mwttg.sjge.graphics.entity.Drawable;
+import io.github.mwttg.sjge.graphics.draw.single.entity.Drawable;
 import java.util.Map;
 
 final class TexturedUniforms implements Uniform {

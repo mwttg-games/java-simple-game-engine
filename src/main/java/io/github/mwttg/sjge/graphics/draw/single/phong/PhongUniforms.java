@@ -1,9 +1,9 @@
-package io.github.mwttg.sjge.graphics.draw.phong;
+package io.github.mwttg.sjge.graphics.draw.single.phong;
 
 import io.github.mwttg.sjge.graphics.draw.Location;
 import io.github.mwttg.sjge.graphics.draw.Uniform;
 import io.github.mwttg.sjge.graphics.draw.light.PointLight;
-import io.github.mwttg.sjge.graphics.entity.Drawable;
+import io.github.mwttg.sjge.graphics.draw.single.entity.Drawable;
 import java.util.Map;
 
 final class PhongUniforms implements Uniform {
@@ -16,7 +16,6 @@ final class PhongUniforms implements Uniform {
 
   void upload(final Drawable entity, final PointLight light) {
     uploadMatrixStack(locations, entity.matrixStack());
-    uploadNormalMatrix(locations, entity.matrixStack().modelMatrix());
     uploadMaterial(locations, entity.material());
     activateTexture0(locations, entity.ids().textureId());
     uploadPointLight(locations, light);
@@ -27,7 +26,6 @@ final class PhongUniforms implements Uniform {
         createLocationFor(shaderProgramId, Location.MODEL_MATRIX),
         createLocationFor(shaderProgramId, Location.VIEW_MATRIX),
         createLocationFor(shaderProgramId, Location.PROJECTION_MATRIX),
-        createLocationFor(shaderProgramId, Location.NORMAL_MATRIX),
         createLocationFor(shaderProgramId, Location.MATERIAL_AMBIENT),
         createLocationFor(shaderProgramId, Location.MATERIAL_DIFFUSE),
         createLocationFor(shaderProgramId, Location.MATERIAL_SPECULAR),

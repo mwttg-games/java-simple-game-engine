@@ -23,7 +23,7 @@ public final class MatrixStackUtilities {
   public static Matrix4f getDefaultViewMatrix() {
     return new Matrix4f().setLookAt(
         0.0f,
-        0.0f,
+        5.0f,
         20.0f,
         0.0f,
         0.0f,

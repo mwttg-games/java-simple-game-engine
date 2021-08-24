@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL40;
 /**
  * A vertex array object which holds the vertex buffer objects (ids) which are needed for rendering an object
  */
-public final class VertexArrayObject {
+public final class VertexArrayObject extends Vao {
 
   private VertexArrayObject() {
   }
@@ -25,17 +25,5 @@ public final class VertexArrayObject {
     bindBuffers(vboDefinitions);
 
     return id;
-  }
-
-  private static void bindBuffers(final List<VboDefinition> vboDefinitions) {
-    var index = 0;
-    for (final VboDefinition definition : vboDefinitions) {
-      final var vboId = definition.vertexBufferObjectId();
-      final var size = definition.sizeOfDataType();
-      GL40.glBindBuffer(GL40.GL_ARRAY_BUFFER, vboId);
-      GL40.glVertexAttribPointer(index, size, GL40.GL_FLOAT, false, 0, 0);
-
-      index++;
-    }
   }
 }

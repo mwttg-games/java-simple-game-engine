@@ -16,4 +16,9 @@ public final class ShaderUtilities {
     return ShaderProgram.create("shaders/phong/vertex-shader.glsl",
         "shaders/phong/fragment-shader.glsl");
   }
+
+  public static int createInstancedPhongShader() {
+    return ShaderProgram.create("shaders/phong/vertex-instanced-shader.glsl",
+        "shaders/phong/fragment-shader.glsl");
+  }
 }

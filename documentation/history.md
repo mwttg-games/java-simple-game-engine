@@ -1,6 +1,14 @@
 # History
 
+### 2021-08-24
+Instanced Phong Render
+
+### 2021-08-23
+Did some refactoring.
+Start Instanced Phong Render.
+
 ### 2021-08-22
+
 Add Phong Shading pipeline
 
 ### 2021-08-14

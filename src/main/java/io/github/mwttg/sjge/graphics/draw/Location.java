@@ -10,7 +10,6 @@ public interface Location {
   String MATERIAL_SPECULAR = "material.specular";
   String MATERIAL_SPECULAR_EXPONENT = "material.specularExponent";
   String MODEL_MATRIX = "modelMatrix";
-  String NORMAL_MATRIX = "normalMatrix";
   String PROJECTION_MATRIX = "projectionMatrix";
   String TEXTURE_SAMPLER = "textureSampler";
   String VIEW_MATRIX = "viewMatrix";

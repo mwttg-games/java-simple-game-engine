@@ -1,11 +1,10 @@
 package io.github.mwttg.sjge.graphics.draw;
 
 import io.github.mwttg.sjge.graphics.draw.light.PointLight;
-import io.github.mwttg.sjge.graphics.entity.Material;
-import io.github.mwttg.sjge.graphics.entity.MatrixStack;
+import io.github.mwttg.sjge.graphics.draw.material.Material;
+import io.github.mwttg.sjge.graphics.draw.single.entity.MatrixStack;
 import java.nio.FloatBuffer;
 import java.util.Map;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
@@ -37,14 +36,6 @@ public interface Uniform {
         material.specularExponent());
   }
 
-  default void uploadNormalMatrix(final Map<String, Integer> locations,
-                                  final Matrix4f modelMatrix) {
-    final var normalMatrix = new Matrix3f(modelMatrix).transpose().invert();
-    final var location = locations.get(Location.NORMAL_MATRIX);
-    final var buffer = normalMatrix.get(MATRIX_BUFFER);
-    GL40.glUniformMatrix4fv(location, false, buffer);
-  }
-
   default void uploadMatrixStack(final Map<String, Integer> locations,
                                  final MatrixStack matrixStack) {
     uploadModelMatrix(locations, matrixStack.modelMatrix());
@@ -58,13 +49,13 @@ public interface Uniform {
     GL40.glUniformMatrix4fv(location, false, buffer);
   }
 
-  private void uploadViewMatrix(final Map<String, Integer> locations, final Matrix4f viewMatrix) {
+  default void uploadViewMatrix(final Map<String, Integer> locations, final Matrix4f viewMatrix) {
     final var location = locations.get(Location.VIEW_MATRIX);
     final var buffer = viewMatrix.get(MATRIX_BUFFER);
     GL40.glUniformMatrix4fv(location, false, buffer);
   }
 
-  private void uploadProjectionMatrix(final Map<String, Integer> locations,
+  default void uploadProjectionMatrix(final Map<String, Integer> locations,
                                       final Matrix4f projectionMatrix) {
     final var location = locations.get(Location.PROJECTION_MATRIX);
     final var buffer = projectionMatrix.get(MATRIX_BUFFER);
